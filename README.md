@@ -106,9 +106,9 @@ ssize_t sub_160D()
 Các stage 1 2 3 nó có khối lệnh điều kiện, nếu sai thì sẽ exit chương trình. Nhưng chúng ta đã được cấp phép RWX rồi nên ta có thể đổi các byte ở các lệnh if để jump thẳng qua lệnh exit luôn, không quan tâm đến điều kiện. Sau đó ta sẽ sửa độ lớn byte có thể nhập vào ở stage 4 và thực thi **Buffer Overflow** để chèn ROPchain vào RIP của main và thực thi nó. Ok bắt đầu thôi !
 
 ## 2. Cách thực thi
-Trước tiên các bạn hãy build dockerfile ra, lấy file libc và dùng pwninit để patched file này sao cho giống offset trên server. Tôi sẽ dùng file đã patched để chỉ cho các bạn.
+Trước tiên các bạn hãy build dockerfile ra, lấy file libc và dùng pwninit để patched file này sao cho giống offset trên server. Mình sẽ dùng file đã patched để chỉ cho các bạn.
 
-Đầu tiên là lỗi **Format String**, tôi sẽ dùng nó để in ra Leak libc, Binary. Mở gdb lên và đặt breakpoint ở chỗ read khúc nhập tên, vì file này bị mã hóa nên các bạn xài được tên hàm đâu. Sử dụng cái số sau `sub_xxxx` + PIE base ở vmmap là ra được vị trí ở đó. Sau đó hãy gõ `x/i địa chỉ`.
+Đầu tiên là lỗi **Format String**, mình sẽ dùng nó để in ra Leak libc, Binary. Mở gdb lên và đặt breakpoint ở chỗ read khúc nhập tên, vì file này bị mã hóa nên các bạn không xài được tên hàm đâu. Sử dụng cái số sau `sub_xxxx` + PIE base ở vmmap là ra được vị trí ở đó. Sau đó hãy gõ `x/i địa chỉ`.
 
 <img width="989" height="537" alt="image" src="https://github.com/user-attachments/assets/02244296-ebe4-4439-aaed-983d24b5c165" />
 
